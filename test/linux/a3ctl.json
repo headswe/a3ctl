@@ -1,0 +1,23 @@
+{
+  "steamCmd": "/test/fake-steamcmd",
+  "steamUser": "tester",
+  "stateDir": "/srv/a3/state",
+  "logsDir": "/srv/a3/logs",
+  "workshopDir": "/srv/a3/workshop",
+  "modsDir": "/srv/a3/mods",
+  "installs": { "arma3": { "dir": "/srv/a3/install", "branch": "creatordlc" } },
+  "mods": {},
+  "modsets": {},
+  "servers": {
+    "main": { "install": "arma3", "dir": "/srv/a3/servers/main", "port": 2302, "dlc": ["gm"], "modsets": ["main"], "args": ["-exThreads=7"], "env": { "DISPLAY": ":99" } },
+    "broken": { "install": "arma3", "dir": "/srv/a3/servers/broken", "port": 2999, "modsets": [] },
+    "hc1": { "type": "headless", "install": "arma3", "dir": "/srv/a3/servers/hc1", "connect": "127.0.0.1:2302", "password": "pw", "config": null, "modsets": ["main"] }
+  },
+  "swifty": {
+    "exe": "/test/fake-swifty",
+    "groupDir": "/srv/a3/swifty",
+    "publishDir": "/srv/www/t1t",
+    "url": "https://mods.example.com/t1t/",
+    "repos": { "main": { "modsets": ["main"], "optionalModsets": ["optional"] } }
+  }
+}

@@ -1,0 +1,4 @@
+* text=auto
+# Run inside Linux containers; CRLF would break them.
+test/linux/** text eol=lf
+*.sh text eol=lf

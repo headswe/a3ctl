@@ -1,0 +1,25 @@
+#!/bin/bash
+# Mimics enough SteamCMD output for a3ctl.
+dir=""; args=("$@")
+echo "Redirecting stderr to '/root/Steam/logs/stderr.txt'"
+for ((i=0;i<${#args[@]};i++)); do
+  case "${args[$i]}" in
+    +force_install_dir) dir="${args[$((i+1))]}";;
+    +login) echo "Logging in user '${args[$((i+1))]}' to Steam Public...OK"; echo "Waiting for user info...OK";;
+    +workshop_download_item)
+      id="${args[$((i+2))]}"; echo "Downloading item $id ..."
+      if [ "$id" = "463939057" ] && [ ! -f /tmp/ace_failed_once ]; then
+        touch /tmp/ace_failed_once; echo "ERROR! Download item $id failed (Timeout)."; continue; fi
+      c="$dir/steamapps/workshop/content/107410/$id"
+      mkdir -p "$c/Addons" "$c/Keys"
+      echo "pbo-$id-$(date +%s%N)" > "$c/Addons/Some_File_$id.PBO"
+      echo "key-$id" > "$c/Keys/Author_$id.BiKey"
+      echo "mod" > "$c/Mod.CPP"
+      echo "Success. Downloaded item $id to \"$c\" (1234 bytes)";;
+    +app_update)
+      for p in 10 50 90; do echo " Update state (0x61) downloading, progress: $p.00 ($((p*1000)) / 100000)"; done
+      mkdir -p "$dir/gm" "$dir/keys" "$dir/addons" "$dir/battleye"; echo a3 > "$dir/keys/a3.bikey"; echo gm > "$dir/keys/gm.bikey"; echo be > "$dir/battleye/beserver_x64.so"
+      cp /test/fake-arma "$dir/arma3server_x64"; chmod +x "$dir/arma3server_x64"
+      echo "Success! App '${args[$((i+1))]}' fully installed.";;
+  esac
+done

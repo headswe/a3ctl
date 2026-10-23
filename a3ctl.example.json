@@ -1,0 +1,70 @@
+{
+  "steamCmd": "steamcmd",
+  "steamUser": "your_steam_account",
+
+  "stateDir": "/home/arma/a3ctl/state",
+  "logsDir": "/home/arma/a3ctl/logs",
+  "workshopDir": "/home/arma/a3ctl/workshop",
+  "modsDir": "/home/arma/a3ctl/mods",
+
+  "installs": {
+    "arma3": {
+      "dir": "/home/arma/arma3/install",
+      "branch": "creatordlc"
+    }
+  },
+
+  "mods": {
+    "@cba_a3": { "workshopId": 450814997 },
+    "@ace": { "workshopId": 463939057 },
+    "@acre2": { "workshopId": 751965892 }
+  },
+
+  "modsets": {
+    "main": ["@cba_a3", "@ace", "@acre2"],
+    "optional": [],
+    "server": []
+  },
+
+  "servers": {
+    "main": {
+      "install": "arma3",
+      "dir": "/home/arma/arma3/servers/main",
+      "port": 2302,
+      "dlc": ["gm"],
+      "modsets": ["main"],
+      "serverModsets": ["server"],
+      "args": ["-exThreads=7", "-enableHT", "-hugepages", "-noSound", "-bandwidthAlg=2", "-limitFPS=1000"],
+      "env": { "DISPLAY": ":99" }
+    },
+    "mission": {
+      "install": "arma3",
+      "dir": "/home/arma/arma3/servers/mission",
+      "port": 2402,
+      "dlc": ["gm"],
+      "modsets": ["main"],
+      "args": ["-exThreads=7", "-enableHT", "-hugepages", "-noSound", "-limitFPS=1000"]
+    },
+    "hc1": {
+      "type": "headless",
+      "for": "main",
+      "dir": "/home/arma/arma3/servers/hc1",
+      "config": null,
+      "args": ["-cpuCount=4", "-exThreads=7", "-hugepages", "-limitFPS=1000"]
+    }
+  },
+
+  "swifty": {
+    "exe": "swifty",
+    "groupDir": "/home/arma/a3ctl/swifty/t1t",
+    "publishDir": "/var/www/swifty/t1t",
+    "files": "link",
+    "url": "https://mods.example.com/t1t/",
+    "repos": {
+      "main": {
+        "modsets": ["main"],
+        "optionalModsets": ["optional"]
+      }
+    }
+  }
+}

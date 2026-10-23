@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "fake arma pid $$ cwd $(pwd)"; printf 'arg: %s\n' "$@"; echo "DISPLAY=$DISPLAY"
+for a in "$@"; do [ "$a" = "-port=2999" ] && { echo "bind failed"; exit 3; }; done
+trap 'echo "got SIGTERM, shutting down"; exit 0' TERM
+while true; do sleep 1; done

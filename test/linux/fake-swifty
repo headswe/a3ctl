@@ -1,0 +1,7 @@
+#!/bin/bash
+# Stands in for the swifty CLI: records the call and what it was given.
+echo "fake swifty: $*"
+if [ "$1 $2" = "admin publish" ]; then
+  mkdir -p "$4" && cp "$3/swifty-group.json" "$4/group.json"
+  echo "--- group folder"; find "$3" -type f | sort
+fi
